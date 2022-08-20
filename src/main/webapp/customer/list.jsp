@@ -7,30 +7,33 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <html>
 <head>
     <title>List customer</title>
 </head>
-<body>
-<h1>Customer</h1>
+<body class="container">
+<div style="text-align: center">
+    <h1>Customer</h1>
+
+</div>
 <p>
-    <a href="/customers?action=create">Create new customer</a>
+    <a class="btn btn-primary" href="/customers?action=create">Create</a>
 </p>
-<table border="1">
-    <tr>
+<table class="table table-striped">
+    <tr >
         <td>Name</td>
         <td>Email</td>
         <td>Address</td>
-        <td>Edit</td>
-        <td>Delete</td>
+        <td style="text-align: center" colspan="2">Action</td>
     </tr>
     <c:forEach var="customer" items='${requestScope["customers"]}'>
         <tr>
-            <td><a href="/customers?action=view&id=${customer.getId()}">${customer.getName()}</a></td>
+            <td><a class="btn btn-light" href="/customers?action=view&id=${customer.getId()}">${customer.getName()}</a></td>
             <td>${customer.getEmail()}</td>
             <td>${customer.getAddress()}</td>
-            <td><a href="/customers?action=edit&id=${customer.getId()}">edit</a></td>
-            <td><a href="/customers?action=delete&id=${customer.getId()}">delete</a></td>
+            <td style="text-align: center"><a class="btn btn-success" href="/customers?action=edit&id=${customer.getId()} ">edit</a></td>
+            <td style="text-align: center"><a class="btn btn-danger"href="/customers?action=delete&id=${customer.getId() }">delete</a></td>
 
         </tr>
     </c:forEach>

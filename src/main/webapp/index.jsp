@@ -10,6 +10,6 @@
     <title>fmt:formatDate example</title>
 </head>
 <body>
-
+<c:redirect url="/customers"></c:redirect>
 </body>
 </html>
