@@ -1,18 +1,18 @@
-package com.example.jstl_demo;
+package com.example.jstl_demo.product;
 
-public class Customer {
+public class Product {
     private int id;
     private String name;
-    private String email;
+    private int cost;
     private String address;
 
-    public Customer() {
+    public Product() {
     }
 
-    public Customer(int id, String name, String email, String address) {
+    public Product(int id, String name, int cost, String address) {
         this.id = id;
         this.name = name;
-        this.email = email;
+        this.cost = cost;
         this.address = address;
     }
 
@@ -32,12 +32,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public int getCost() {
+        return cost;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public String getAddress() {
@@ -46,5 +46,15 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cost=" + cost +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

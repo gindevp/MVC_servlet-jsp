@@ -1,4 +1,7 @@
-package com.example.jstl_demo;
+package com.example.jstl_demo.customer;
+
+import com.example.jstl_demo.customer.Customer;
+import com.example.jstl_demo.customer.CustomerService;
 
 import java.util.ArrayList;
 import java.util.HashMap;

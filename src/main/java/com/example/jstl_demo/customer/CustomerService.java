@@ -1,4 +1,6 @@
-package com.example.jstl_demo;
+package com.example.jstl_demo.customer;
+
+import com.example.jstl_demo.customer.Customer;
 
 import java.util.List;
 

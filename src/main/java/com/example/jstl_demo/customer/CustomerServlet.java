@@ -1,4 +1,8 @@
-package com.example.jstl_demo;
+package com.example.jstl_demo.customer;
+
+import com.example.jstl_demo.customer.Customer;
+import com.example.jstl_demo.customer.CustomerService;
+import com.example.jstl_demo.customer.CustomerServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +15,7 @@ import java.util.List;
 
 @WebServlet(name ="CustomerServlet", value = "/customers")
 public class CustomerServlet extends HttpServlet {
-private CustomerService customerService = new CustomerServiceImpl();
+    private CustomerService customerService = new CustomerServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,11 +35,32 @@ private CustomerService customerService = new CustomerServiceImpl();
                 break;
             case "view":
                 viewCustomer(req,resp);
+                break;
             default:
                 listCustomers(req,resp);
                 break;
         }
 
+    }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if(action==null){
+            action="";
+        }
+        switch (action){
+            case "create":
+                createCustomer(req, resp);
+                break;
+            case "edit":
+                updateCustomer(req, resp);
+                break;
+            case "delete":
+                deleteCustomer(req,resp);
+                break;
+            default:
+                break;
+        }
     }
 
     private void viewCustomer(HttpServletRequest request, HttpServletResponse response) {
@@ -122,33 +147,13 @@ private CustomerService customerService = new CustomerServiceImpl();
 
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if(action==null){
-            action="";
-        }
-        switch (action){
-            case "create":
-                createCustomer(req, resp);
-                break;
-            case "edit":
-                updateCustomer(req, resp);
-                break;
-            case "delete":
-                deleteCustomer(req,resp);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Customer customer = this.customerService.findById(id);
         RequestDispatcher dispatcher;
         if(customer == null){
             dispatcher = request.getRequestDispatcher("error-404.jsp");
+            dispatcher.forward(request,response);
         } else {
             this.customerService.remove(id);
             try {
@@ -157,6 +162,7 @@ private CustomerService customerService = new CustomerServiceImpl();
                 e.printStackTrace();
             }
         }
+
     }
 
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response) {
